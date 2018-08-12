@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+const chalk = require('chalk');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = process.env.PORT || '3000';
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+
+app.listen(port, () => {
+  console.log(chalk.bold.green("=================================================="));
+  console.log(chalk.bold.green("    server is running on port " + port));
+  console.log(chalk.bold.green("    Db Url:  " + process.env.DBURL));
+  console.log(chalk.bold.green("=================================================="));
+
+})

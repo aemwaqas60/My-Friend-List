@@ -1,0 +1,13 @@
+<div class="container">
+  <div *ngFor="let user of users">
+    <div routerLink="/home/userDetails/{{user._id}}" class="card" style="margin-top: 10px; width:400px">
+      <div class="card-body">
+        <h4 class="card-title">{{user?.username}}</h4>
+        <p class="card-title">{{user?.created_date | date: 'longDate' }}</p>
+        <a (click)="onAddNewFriend(user._id)" class=" btn btn-primary ">+ Friend</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
