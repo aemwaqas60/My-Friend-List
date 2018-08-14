@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var friendsRouter = require('./routes/friends');
 var authRouter = require('./routes/auth');
-
+var cors = require('cors')
 var app = express();
 
 // require('./nodemon_config');
@@ -20,6 +20,9 @@ require('./config/mongodb_config');
 
 // passport config
 require('./helpers/passport')(passport);
+
+// cros origin middleware 
+app.use(cors())
 
 // morgan middleware
 app.use(logger('dev'));
