@@ -13,7 +13,7 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-require('./nodemon_config');
+// require('./nodemon_config');
 
 // mongoose connection
 require('./config/mongodb_config');
