@@ -4,6 +4,6 @@ var path = require('path');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.sendFile(express.static(path.join(__dirname, 'public/dist/index.html')));
+ return  res.sendFile((path.join(__dirname, '/../public/dist/index.html')));
 });
 module.exports = router;
