@@ -42,8 +42,6 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-
-
 // static folder path
 app.use(express.static(path.join(__dirname, 'public/dist')));
 
