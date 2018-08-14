@@ -26,22 +26,10 @@ var sendEmail = function sendEmail(email) {
     };
     transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
-            /*  res.status(404).json({
-                 status: "404",
-                 message: "email not sent,use valid email id",
-                 error: err
-             }) */
+            next(err);
 
-            console.log("Email sending error", err);
         } else {
-            console.log("Email send successfully");
-
-            /*  res.status(200).json({
-                 status: "200",
-                 message: "email sent successfully",
-                 user: user,
-                 code: code
-             }) */
+            return;
         }
     });
 }

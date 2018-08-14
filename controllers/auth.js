@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -9,18 +9,18 @@ module.exports = {
     // user signup controller function
     signup(req, res, next) {
         let newUser = req.body;
-        bcrypt.hash(newUser.password, 10, (err, hashPassword) => {
-            if (err) {
-                res.status(500).json({
-                    message: "passwod encryption error occured"
-                });
-            } else {
+        bcrypt.genSalt(10, (saltError, salt) => {
+            if (saltError) {
+                next(saltError);
+            }
+            bcrypt.hash(newUser.password, salt, (hashError, hashPassword) => {
+                if (hashError) {
+                    next(hashError);
+                }
                 newUser.password = hashPassword;
                 User.create(newUser)
                     .then((user) => {
-
                         sendMailEmitter.emit('sendEmail', user.email);
-
                         res.status(200).json({
                             message: "Signup successfull",
                             user: user
@@ -32,11 +32,13 @@ module.exports = {
                             error: err
                         });
                     })
-            }
+            })
         })
+
+
     },
 
-    // user signin controller fucntion
+    // user signin controller function
     signin(req, res, next) {
         passport.authenticate('local', (err, user, info) => {
             if (err) {
