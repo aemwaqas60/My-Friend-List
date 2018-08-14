@@ -17,7 +17,8 @@ export class SignupComponent implements OnInit {
   user = {
     email: '',
     username: '',
-    password: ''
+    password: '',
+    repeatPassword: ''
   };
 
   checkUserName = {
