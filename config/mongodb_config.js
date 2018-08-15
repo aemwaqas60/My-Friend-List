@@ -8,9 +8,8 @@ error = chalk.bold.yellow;
 disconnected = chalk.bold.red;
 termination = chalk.bold.magenta;
 
-const DBURL = process.env.DBURL;
+const DBURL = process.env.DBURL | 'mongodb://127.0.0.1:27017/friend-list';
 mongoose.connect(DBURL);
-
 
 mongoose.connection.on('connected', () => {
     console.log(connected('Mongoose defual connnection is open to', DBURL));
