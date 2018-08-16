@@ -1,6 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpInterceptor } from '../../../../node_modules/@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,10 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     const tokenizedReuest = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${authService.getToken()}`
+        Authorization: `Bearer ${authService.getToken()}`,
+        observe: 'body',
+        withCredentials: true,
+        headers: new HttpHeaders().append('Content-Type', 'application/json')
       }
     });
     return next.handle(tokenizedReuest);

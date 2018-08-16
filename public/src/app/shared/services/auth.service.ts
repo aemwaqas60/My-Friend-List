@@ -13,20 +13,12 @@ export class AuthService {
   constructor(private _http: HttpClient) { }
 
   signin(user) {
-    return this._http.post<any>(this.BASE_URL + '/auth/signin', user, {
-      observe: 'body',
-      withCredentials: true,
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
-    });
+    return this._http.post<any>(this.BASE_URL + '/auth/signin', user);
   }
 
   signup(user) {
 
-    return this._http.post<any>(this.BASE_URL + '/auth/signup', user, {
-      observe: 'body',
-      withCredentials: true,
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
-    });
+    return this._http.post<any>(this.BASE_URL + '/auth/signup', user);
   }
   checkUserName(user_name) {
     return this._http.post<any>(this.BASE_URL + '/auth/checkUsername', user_name);
