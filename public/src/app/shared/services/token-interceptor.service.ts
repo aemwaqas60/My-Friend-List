@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { AuthService } from './auth.service';
-import { HttpInterceptor } from '../../../../node_modules/@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
