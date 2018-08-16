@@ -51,6 +51,7 @@ module.exports = {
                     message: "Invalid username or password error"
                 });
             } else {
+                // jwt payload
                 const palyload = {
                     _id: user._id
                 }

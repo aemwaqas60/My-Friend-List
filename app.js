@@ -3,8 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
-var passport = require('passport');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,13 +12,36 @@ var authRouter = require('./routes/auth');
 var cors = require('cors');
 var app = express();
 
-require('./nodemon_config');
+// require('./nodemon_config');
 
 // mongoose connection
 require('./config/mongodb_config');
 
-// cros origin middleware 
-app.use(cors());
+// cros origin header middleware 
+app.use((req, res, next) => {
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Header",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
+  next();
+});
+app.use(cors({
+  origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1:4200', 'http://localhost:4200'],
+  credentials: true
+}));
+
+// passport middleware 
+var session = require('express-session');
+var passport = require('passport');
+
+
+
 
 // passport config
 require('./helpers/passport')(passport);
