@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -13,12 +13,20 @@ export class AuthService {
   constructor(private _http: HttpClient) { }
 
   signin(user) {
-    return this._http.post<any>(this.BASE_URL + '/auth/signin', user);
+    return this._http.post<any>(this.BASE_URL + '/auth/signin', user, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
   }
 
   signup(user) {
 
-    return this._http.post<any>(this.BASE_URL + '/auth/signup', user);
+    return this._http.post<any>(this.BASE_URL + '/auth/signup', user, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
   }
   checkUserName(user_name) {
     return this._http.post<any>(this.BASE_URL + '/auth/checkUsername', user_name);
